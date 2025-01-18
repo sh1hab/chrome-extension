@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "FB Marketplace Uploader",
+  "version": "1.0",
+  "description": "Automated Facebook Marketplace product upload tool",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.facebook.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/marketplace/create/item"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "web_accessible_resources": [{
+    "resources": ["content.js"],
+    "matches": ["https://www.facebook.com/*"]
+  }]
+}
